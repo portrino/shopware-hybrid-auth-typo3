@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.2/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+
+        <!--
+
+        General
+
+        -->
+
+        <element type="boolean" scope="shop">
+            <name>general_force_sso</name>
+            <label lang="en">General :: Force Single Sign-On</label>
+            <label lang="de">General :: Single Sign-On erzwingen</label>
+            <value>false</value>
+            <description lang="en">
+                The shop can only be viewed with an active login session. Therefor the user will be forced to authenticate
+                using the selected OAuth2 Provider in the plugin configuration.
+            </description>
+            <description lang="de">
+                Der Shop kann nur mit einer aktiven Login-Session angezeigt werden. Deshalt wird der Benutzer gezwungen
+                sich mittels dem in der Plugin Konfiguration ausgewählten OAuth2 Anbieter zu authentifizieren.
+            </description>
+        </element>
+
+        <!--
+
+        TYPO3
+
+        -->
+
+        <element type="boolean" scope="shop">
+            <name>typo3_enabled</name>
+            <label lang="en">TYPO3 :: Enabled</label>
+            <label lang="de">TYPO3 :: Aktiviert</label>
+            <description lang="en">
+                Activate TYPO3 OAuth login?
+            </description>
+            <description lang="de">
+                TYPO3 OAuth Login aktivieren?
+            </description>
+        </element>
+
+        <element type="text" scope="shop">
+            <name>typo3_keys_id</name>
+            <label lang="en">TYPO3 :: Client-ID</label>
+            <label lang="de">TYPO3 :: Client-ID</label>
+            <description lang="en">
+            </description>
+            <description lang="de">
+            </description>
+        </element>
+
+        <element type="text" scope="shop">
+            <name>typo3_keys_secret</name>
+            <label lang="en">TYPO3 :: Client Secret</label>
+            <label lang="de">TYPO3 :: Client Secret</label>
+            <description lang="en">
+            </description>
+            <description lang="de">
+            </description>
+        </element>
+
+    </elements>
+</config>

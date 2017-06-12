@@ -1,0 +1,36 @@
+{
+    "name": "portrino/shopware-hybridauthtypo3",
+    "description": "Shopware plugin for social/ oauth2 login",
+    "license": "proprietary",
+    "type": "shopware-plugin",
+    "authors": [
+        {
+            "name": "Andre Wuttig",
+            "email": "wuttig@portrino.de",
+            "homepage": "http://www.portrino.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Axel Boeswetter",
+            "email": "boeswetter@portrino.de",
+            "homepage": "http://www.portrino.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0",
+        "portrino/shopware-hybridauth": "~1.0"
+    },
+    "extra": {
+        "installer-name": "Port1HybridAuthTypo3"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@enable-typo3-provider"
+        ],
+        "enable-typo3-provider": [
+            "[ -d vendor/hybridauth-additional-providers/hybridauth-typo3/Providers ] && cp vendor/hybridauth-additional-providers/hybridauth-typo3/Providers ../Port1HybridAuth/vendor/hybridauth/hybridauth/hybridauth/Hybrid/ -R && echo 'Copy Typo3 Provider' || echo 'Skipped...'",
+            "[ -d vendor/hybridauth-additional-providers/hybridauth-typo3/thirdparty ] && cp vendor/hybridauth-additional-providers/hybridauth-typo3/thirdparty ../Port1HybridAuth/vendor/hybridauth/hybridauth/hybridauth/Hybrid/ -R && echo 'Copy Typo3 OAuth2 Client' || echo 'Skipped...'"
+        ]
+    }
+}
