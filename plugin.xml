@@ -17,6 +17,15 @@
     <author>portrino GmbH</author>
     <compatibility minVersion="5.2.0" />
 
+    <changelog version="1.0.1">
+        <changes lang="de">
+            [BUGFIX] fehlende Typo3Login frontend controller class hinzugefügt
+        </changes>
+        <changes lang="en">
+            [BUGFIX] adds missing Typo3Login frontend controller class
+        </changes>
+    </changelog>
+
     <changelog version="1.0.0">
         <changes lang="de">
             Veröffentlichung
