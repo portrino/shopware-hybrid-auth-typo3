@@ -127,6 +127,7 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
     public function getUserProfile()
     {
         $fields = [
+            'identifier',
             'uid',
             'name',
             'first_name',
@@ -142,11 +143,14 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
         ];
         $data = $this->api->get($this->api->userprofile_url, $params);
 
-        if (!isset($data->uid)) {
+        if (!isset($data->identifier) || !isset($data->uid)) {
             throw new Exception("User profile request failed! {$this->providerId} returned an invalid response.", 1497533436);
         }
 
-        $this->user->profile->identifier = (property_exists($data, 'uid')) ? $data->uid : '';
+        $this->user->profile->identifier = (property_exists($data, 'identifier')) ? $data->identifier : '';
+        if (empty($this->user->profile->identifier) && property_exists($data, 'uid')) {
+            $this->user->profile->identifier = $data->uid;
+        }
         $this->user->profile->displayName = (property_exists($data, 'name')) ? $data->name : '';
         $this->user->profile->firstName = (property_exists($data, 'first_name')) ? $data->first_name : '';
         $this->user->profile->lastName = (property_exists($data, 'last_name')) ? $data->last_name : '';
