@@ -91,5 +91,15 @@
             </description>
         </element>
 
+        <element type="text" scope="shop">
+            <name>typo3_urls_userprofile</name>
+            <label lang="en">TYPO3 :: User Profile URL</label>
+            <label lang="de">TYPO3 :: User Profile URL</label>
+            <description lang="en">
+            </description>
+            <description lang="de">
+            </description>
+        </element>
+
     </elements>
 </config>

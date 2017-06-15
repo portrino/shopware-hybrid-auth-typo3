@@ -24,6 +24,8 @@
 class Typo3OAuth2Client extends OAuth2Client
 {
 
+    public $userprofile_url = '';
+
     public function authenticate($code)
     {
         $params = [
@@ -60,18 +62,9 @@ class Typo3OAuth2Client extends OAuth2Client
         return $response;
     }
 
-    public function logout() {
-        return true;
-    }
-
-    /**
-     * Generate an app secret proof to sign a request to Graph.
-     *
-     * @return string
-     */
-    public function getAppSecretProof()
+    public function logout()
     {
-        return hash_hmac('sha256', $this->access_token, $this->client_secret);
+        return true;
     }
 
     private function request($url, $params = false, $type = 'GET')

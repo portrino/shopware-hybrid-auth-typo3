@@ -47,11 +47,11 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
     /**
      * IDp wrappers initializer
      */
-    function initialize()
+    public function initialize()
     {
 
         if (!$this->config['keys']['id'] || !$this->config['keys']['secret']) {
-            throw new Exception("Your application id and secret are required in order to connect to {$this->providerId}.", 4);
+            throw new Exception("Your application id and secret are required in order to connect to {$this->providerId}.", 1497528188);
         }
         if (!$this->config['urls']['apibase'] || !$this->config['urls']['authorize'] || !$this->config['urls']['token']) {
             throw new Exception("Your application base api, authorize and token URLs (OAuth2 endpoints) are required in order to connect to {$this->providerId}.", 1497528189);
@@ -77,6 +77,7 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
         $this->api->api_base_url = $this->config['urls']['apibase'];
         $this->api->authorize_url = $this->config['urls']['authorize'];
         $this->api->token_url = $this->config['urls']['token'];
+        $this->api->userprofile_url = $this->config['urls']['userprofile'];
 
         $this->api->curl_header = array('Content-Type: application/x-www-form-urlencoded');
 
@@ -100,7 +101,7 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
     /**
      * {@inheritdoc}
      */
-    function loginBegin()
+    public function loginBegin()
     {
         $state = $this->persistentDataHandler->get('state') ?: $this->pseudoRandomStringGenerator->getPseudoRandomString(static::CSRF_LENGTH);
         $this->persistentDataHandler->set('state', $state);
@@ -123,7 +124,7 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
     /**
      * load the user profile from the IDp api client
      */
-    function getUserProfile()
+    public function getUserProfile()
     {
         $fields = [
             'uid',
@@ -137,13 +138,12 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
         ];
         $params = [
             'fields' => implode(',', $fields),
-            'access_token' => $this->api->access_token,
-            'appsecret_proof' => $this->api->getAppSecretProof()
+            'access_token' => $this->api->access_token
         ];
-        $data = $this->api->get('/api/oauth2/profile/', $params);
+        $data = $this->api->get($this->api->userprofile_url, $params);
 
         if (!isset($data->uid)) {
-            throw new Exception("User profile request failed! {$this->providerId} returned an invalid response.", 6);
+            throw new Exception("User profile request failed! {$this->providerId} returned an invalid response.", 1497533436);
         }
 
         $this->user->profile->identifier = (property_exists($data, 'uid')) ? $data->uid : '';
