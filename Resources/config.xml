@@ -61,5 +61,35 @@
             </description>
         </element>
 
+        <element type="text" scope="shop">
+            <name>typo3_urls_apibase</name>
+            <label lang="en">TYPO3 :: API Base URL</label>
+            <label lang="de">TYPO3 :: API Base URL</label>
+            <description lang="en">
+            </description>
+            <description lang="de">
+            </description>
+        </element>
+
+        <element type="text" scope="shop">
+            <name>typo3_urls_authorize</name>
+            <label lang="en">TYPO3 :: Authorize URL</label>
+            <label lang="de">TYPO3 :: Authorize URL</label>
+            <description lang="en">
+            </description>
+            <description lang="de">
+            </description>
+        </element>
+
+        <element type="text" scope="shop">
+            <name>typo3_urls_token</name>
+            <label lang="en">TYPO3 :: Token URL</label>
+            <label lang="de">TYPO3 :: Token URL</label>
+            <description lang="en">
+            </description>
+            <description lang="de">
+            </description>
+        </element>
+
     </elements>
 </config>

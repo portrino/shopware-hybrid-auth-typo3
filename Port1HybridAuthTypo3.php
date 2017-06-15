@@ -10,9 +10,7 @@ namespace Port1HybridAuthTypo3;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Port1HybridAuth\Service\AbstractAuthenticationService;
-use Port1HybridAuth\Service\ConfigurationServiceInterface;
 use Port1HybridAuth\Service\SingleSignOnService;
-use Port1HybridAuth\Service\SingleSignOnServiceInterface;
 use Port1HybridAuthTypo3\Service\AuthenticationService\Typo3AuthenticationService;
 use Shopware\Bundle\AttributeBundle\Service\CrudService;
 use Shopware\Components\Plugin;
@@ -21,9 +19,6 @@ use Shopware\Components\Plugin\Context\InstallContext;
 use Shopware\Components\Plugin\Context\UninstallContext;
 use Shopware\Components\Theme\LessDefinition;
 use Shopware\Models\Customer\Customer;
-
-use Exception;
-use Shopware\Models\Shop\Shop;
 
 /**
  * Class Port1HybridAuthTypo3
@@ -39,6 +34,7 @@ class Port1HybridAuthTypo3 extends Plugin
     public function install(InstallContext $context)
     {
         $this->addIdentityFieldsToUser();
+        $this->copyHybridAuthTypo3Provider();
 
         parent::install($context);
     }
@@ -49,6 +45,7 @@ class Port1HybridAuthTypo3 extends Plugin
     public function activate(ActivateContext $context)
     {
         $this->addIdentityFieldsToUser();
+        $this->copyHybridAuthTypo3Provider();
 
         parent::activate($context);
     }
@@ -59,33 +56,6 @@ class Port1HybridAuthTypo3 extends Plugin
     public function uninstall(UninstallContext $context)
     {
         parent::uninstall($context);
-    }
-
-    /**
-     *
-     */
-    private function addIdentityFieldsToUser()
-    {
-
-        /** @var CrudService $service */
-        $service = $this->container->get('shopware_attribute.crud_service');
-
-        $service->update('s_user_attributes', 'typo3_identity', 'string', [
-            //user has the opportunity to translate the attribute field for each shop
-            'translatable' => false,
-
-            //attribute will be displayed in the backend module
-            'displayInBackend' => true,
-
-            //in case of multi_selection or single_selection type, article entities can be selected,
-            'entity' => Customer::class,
-
-            //numeric position for the backend view, sorted ascending
-            'position' => 100,
-
-            //user can modify the attribute in the free text field module
-            'custom' => false,
-        ]);
     }
 
     /**
@@ -105,7 +75,7 @@ class Port1HybridAuthTypo3 extends Plugin
     public function onFrontendPostDispatch(\Enlight_Event_EventArgs $args)
     {
         /** @var array $config Plugin configuration for current active shop in frontend */
-        $config = Shopware()->Container()->get('shopware.plugin.config_reader')->getByPluginName(
+        $config = Shopware()->Container()->get('shopware.plugin.cached_config_reader')->getByPluginName(
             'Port1HybridAuthTypo3',
             $this->container->get('shop')
         );
@@ -181,6 +151,63 @@ class Port1HybridAuthTypo3 extends Plugin
         );
 
         return new ArrayCollection([$lessDefinition]);
+    }
+
+    /**
+     *
+     */
+    private function addIdentityFieldsToUser()
+    {
+
+        /** @var CrudService $service */
+        $service = $this->container->get('shopware_attribute.crud_service');
+
+        $service->update('s_user_attributes', 'typo3_identity', 'string', [
+            //user has the opportunity to translate the attribute field for each shop
+            'translatable' => false,
+
+            //attribute will be displayed in the backend module
+            'displayInBackend' => true,
+
+            //in case of multi_selection or single_selection type, article entities can be selected,
+            'entity' => Customer::class,
+
+            //numeric position for the backend view, sorted ascending
+            'position' => 100,
+
+            //user can modify the attribute in the free text field module
+            'custom' => false,
+        ]);
+    }
+
+    private function copyHybridAuthTypo3Provider()
+    {
+        /** @var Port1HybridAuthTypo3 $port1HybridAuth */
+        $port1HybridAuth = Shopware()->Container()->get('kernel')->getPlugins()['Port1HybridAuth'];
+        if ($port1HybridAuth !== null) {
+            $this->copy_recursive(
+                $this->getPath() . '/vendor/hybridauth-additional-providers/hybridauth-typo3/',
+                $port1HybridAuth->getPath() . '/vendor/hybridauth/hybridauth/hybridauth/Hybrid/'
+            );
+        } else {
+            throw new \Exception('Please install plugin Port1HybridAuth first!', 1497531163);
+        }
+    }
+
+    private function copy_recursive($src, $dst)
+    {
+        $dir = opendir($src);
+        @mkdir($dst);
+        while (($file = readdir($dir)) !== false) {
+            if (($file != '.') && ($file != '..')) {
+                if (is_dir($src . DIRECTORY_SEPARATOR . $file)) {
+                    $this->copy_recursive($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
+                } else {
+                    copy($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
+                }
+            }
+        }
+        closedir($dir);
     }
 
 }

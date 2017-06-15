@@ -53,6 +53,9 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
         if (!$this->config['keys']['id'] || !$this->config['keys']['secret']) {
             throw new Exception("Your application id and secret are required in order to connect to {$this->providerId}.", 4);
         }
+        if (!$this->config['urls']['apibase'] || !$this->config['urls']['authorize'] || !$this->config['urls']['token']) {
+            throw new Exception("Your application base api, authorize and token URLs (OAuth2 endpoints) are required in order to connect to {$this->providerId}.", 1497528189);
+        }
 
         // override requested scope
         if (isset($this->config['scope']) && !empty($this->config['scope'])) {
@@ -71,9 +74,9 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
             $this->compressed
         );
 
-        $this->api->api_base_url = 'http://finance-magazin.de.192.168.1.203.nip.io/';
-        $this->api->authorize_url = 'http://finance-magazin.de.192.168.1.203.nip.io/api/oauth2/authorize/';
-        $this->api->token_url = 'http://finance-magazin.de.192.168.1.203.nip.io/api/oauth2/token/';
+        $this->api->api_base_url = $this->config['urls']['apibase'];
+        $this->api->authorize_url = $this->config['urls']['authorize'];
+        $this->api->token_url = $this->config['urls']['token'];
 
         $this->api->curl_header = array('Content-Type: application/x-www-form-urlencoded');
 
