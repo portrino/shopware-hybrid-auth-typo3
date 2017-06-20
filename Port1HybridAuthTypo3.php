@@ -163,6 +163,8 @@ class Port1HybridAuthTypo3 extends Plugin
         $service = $this->container->get('shopware_attribute.crud_service');
 
         $service->update('s_user_attributes', 'typo3_identity', 'string', [
+            'label' => 'Identity TYPO3',
+
             //user has the opportunity to translate the attribute field for each shop
             'translatable' => false,
 
