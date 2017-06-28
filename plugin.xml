@@ -3,7 +3,7 @@
     <label lang="de">Portrino HybridAuth - TYPO3</label>
     <label lang="en">Portrino HybridAuth - TYPO3</label>
 
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <copyright>(c) by portrino GmbH</copyright>
     <license>proprietary</license>
     <description lang="de">
@@ -16,6 +16,15 @@
     <link>http://www.portrino.de/</link>
     <author>portrino GmbH</author>
     <compatibility minVersion="5.2.0" />
+
+    <changelog version="1.0.6">
+        <changes lang="de">
+            [BUGFIX] Override-Funktion Typo3OAuth2Client->authorizeUrl() hinzugefügt, um eine korrekte Generierung des Query-Strings der Authorize URL zu gewährleisten
+        </changes>
+        <changes lang="en">
+            [BUGFIX] Adds override-function Typo3OAuth2Client->authorizeUrl() to guarantee the correct generation of the query string of the authorize url
+        </changes>
+    </changelog>
 
     <changelog version="1.0.5">
         <changes lang="de">

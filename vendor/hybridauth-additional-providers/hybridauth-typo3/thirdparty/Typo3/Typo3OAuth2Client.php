@@ -26,6 +26,32 @@ class Typo3OAuth2Client extends OAuth2Client
 
     public $userprofile_url = '';
 
+    public function authorizeUrl($extras = array())
+    {
+        Hybrid_Logger::info('Enter OAuth2Client::authorizeUrl( $extras )');
+        Hybrid_Logger::debug('OAuth2Client::authorizeUrl(). dump extras: ', serialize($extras));
+
+        $params = array(
+            'client_id' => $this->client_id,
+            'redirect_uri' => $this->redirect_uri,
+            'response_type' => 'code'
+        );
+
+        if (count($extras)) {
+            foreach ($extras as $k => $v) {
+                $params[$k] = $v;
+            }
+        }
+
+        $result = $this->authorize_url .
+            (strpos($this->authorize_url, '?') !== false ? '&' : '?') .
+            http_build_query($params, '', '&');
+
+        Hybrid_Logger::debug('OAuth2Client::authorizeUrl(). result: ', $result);
+
+        return $result;
+    }
+
     public function authenticate($code)
     {
         $params = [
@@ -73,7 +99,7 @@ class Typo3OAuth2Client extends OAuth2Client
         Hybrid_Logger::debug('OAuth2Client::request(). dump request params: ', serialize($params));
 
         if ($type == 'GET') {
-            $url = $url . (strpos($url, '?') ? '&' : '?') . http_build_query($params, '', '&');
+            $url = $url . (strpos($url, '?') !== false ? '&' : '?') . http_build_query($params, '', '&');
         }
 
         $this->http_info = array();
