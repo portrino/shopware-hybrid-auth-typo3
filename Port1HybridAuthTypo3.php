@@ -74,12 +74,17 @@ class Port1HybridAuthTypo3 extends Plugin
      */
     public function onFrontendPostDispatch(\Enlight_Event_EventArgs $args)
     {
+        /** @var \Enlight_Controller_Action $controller */
+        $controller = $args->get('subject');
+        /** @var \Enlight_View_Default $view */
+        $view = $controller->View();
+
         /** @var array $config Plugin configuration for current active shop in frontend */
         $config = Shopware()->Container()->get('shopware.plugin.cached_config_reader')->getByPluginName(
             'Port1HybridAuthTypo3',
             $this->container->get('shop')
         );
-
+        $view->assign('Port1HybridAuthTypo3Config', $config);
 
         if ((bool)$config['general_force_sso'] === true) {
             /** @var \Enlight_Controller_Action $controller */

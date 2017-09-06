@@ -3,7 +3,7 @@
     <label lang="de">Portrino HybridAuth - TYPO3</label>
     <label lang="en">Portrino HybridAuth - TYPO3</label>
 
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <copyright>(c) by portrino GmbH</copyright>
     <license>proprietary</license>
     <description lang="de">
@@ -16,6 +16,17 @@
     <link>http://www.portrino.de/</link>
     <author>portrino GmbH</author>
     <compatibility minVersion="5.2.0" />
+
+    <changelog version="1.0.7">
+        <changes lang="de">
+            [FEATURE] Feld für Benutzerregistrierung (extern) Endpunkt/ URL in Plugin-Konfiguration hinzugefügt
+            [FEATURE] Feld für zusätzliche CSS Klasse für Login/ Register Buttons in Plugin-Konfiguration hinzugefügt
+        </changes>
+        <changes lang="en">
+            [FEATURE] Adds field for (external) user registration endpoint/ URL in plugin configuration
+            [FEATURE] Adds field for additional css class for login/ register buttons in plugin configuration
+        </changes>
+    </changelog>
 
     <changelog version="1.0.6">
         <changes lang="de">

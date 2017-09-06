@@ -25,7 +25,7 @@
 
         <!--
 
-        TYPO3
+        TYPO3 OAuth
 
         -->
 
@@ -95,6 +95,38 @@
             <name>typo3_urls_userprofile</name>
             <label lang="en">TYPO3 :: User Profile URL</label>
             <label lang="de">TYPO3 :: User Profile URL</label>
+            <description lang="en">
+            </description>
+            <description lang="de">
+            </description>
+        </element>
+
+        <!--
+
+        TYPO3 Misc
+
+        -->
+
+        <element type="text" scope="shop">
+            <name>typo3_urls_userregistration</name>
+            <label lang="en">TYPO3 :: User Registration URL (external)</label>
+            <label lang="de">TYPO3 :: User Registration URL (external)</label>
+            <description lang="en">
+            </description>
+            <description lang="de">
+            </description>
+        </element>
+
+        <!--
+
+        Misc
+
+        -->
+
+        <element type="text" scope="shop">
+            <name>misc_login_register_button_css_class</name>
+            <label lang="en">Misc :: Additional Login/ Register Button CSS Class</label>
+            <label lang="de">Misc :: Additional Login/ Register Button CSS Class</label>
             <description lang="en">
             </description>
             <description lang="de">
