@@ -135,7 +135,8 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
             'email',
             'address',
             'zip',
-            'city'
+            'city',
+            'company'
         ];
         $params = [
             'fields' => implode(',', $fields),
@@ -159,6 +160,7 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
         $this->user->profile->address = (property_exists($data, 'address')) ? $data->address : '';
         $this->user->profile->zip = (property_exists($data, 'zip')) ? $data->zip : '';
         $this->user->profile->city = (property_exists($data, 'city')) ? $data->city : '';
+        $this->user->profile->organization_name = (property_exists($data, 'company')) ? $data->company : '';
 
         return $this->user->profile;
     }
