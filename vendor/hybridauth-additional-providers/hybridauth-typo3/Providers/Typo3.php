@@ -138,30 +138,73 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
             'city',
             'company'
         ];
+        if ($this->config['shopwarePluginConfig']['typo3_urls_userprofile_request_fields'] != '') {
+            $fields = $this->trimExplode(
+                ',',
+                $this->config['shopwarePluginConfig']['typo3_urls_userprofile_request_fields'],
+                true
+            );
+        }
+
         $params = [
             'fields' => implode(',', $fields),
             'access_token' => $this->api->access_token
         ];
         $data = $this->api->get($this->api->userprofile_url, $params);
+        if (is_object($data)) {
+            $data = get_object_vars($data);
+        }
 
-        if (!isset($data->identifier) || !isset($data->uid)) {
+        if (!isset($data['identifier']) || !isset($data['uid'])) {
             throw new Exception("User profile request failed! {$this->providerId} returned an invalid response.", 1497533436);
         }
 
-        $this->user->profile->identifier = (property_exists($data, 'identifier')) ? $data->identifier : '';
-        if (empty($this->user->profile->identifier) && property_exists($data, 'uid')) {
+        foreach ($data as $key => $value) {
+            if (property_exists($this->user->profile, $key)) {
+                $this->user->profile->$key = $value;
+            }
+        }
+        if (empty($this->user->profile->identifier) && isset($data['uid'])) {
             $this->user->profile->identifier = $data->uid;
         }
-        $this->user->profile->displayName = (property_exists($data, 'name')) ? $data->name : '';
-        $this->user->profile->firstName = (property_exists($data, 'first_name')) ? $data->first_name : '';
-        $this->user->profile->lastName = (property_exists($data, 'last_name')) ? $data->last_name : '';
-        $this->user->profile->email = (property_exists($data, 'email')) ? $data->email : '';
-        $this->user->profile->emailVerified = (property_exists($data, 'email')) ? $data->email : '';
-        $this->user->profile->address = (property_exists($data, 'address')) ? $data->address : '';
-        $this->user->profile->zip = (property_exists($data, 'zip')) ? $data->zip : '';
-        $this->user->profile->city = (property_exists($data, 'city')) ? $data->city : '';
-        $this->user->profile->organization_name = (property_exists($data, 'company')) ? $data->company : '';
+        if (!empty($this->user->profile->email)) {
+            $this->user->profile->emailVerified = $this->user->profile->email;
+        }
 
         return $this->user->profile;
+    }
+
+    /**
+     * Explodes a string and trims all values for whitespace in the end.
+     * If $onlyNonEmptyValues is set, then all blank ('') values are removed.
+     *
+     * @param string $delim Delimiter string to explode with
+     * @param string $string The string to explode
+     * @param bool $removeEmptyValues If set, all empty values will be removed in output
+     * @param int $limit If limit is set and positive, the returned array will contain a maximum of limit elements with
+     *                   the last element containing the rest of string. If the limit parameter is negative, all components
+     *                   except the last -limit are returned.
+     * @return array Exploded values
+     */
+    protected function trimExplode($delim, $string, $removeEmptyValues = false, $limit = 0)
+    {
+        $result = explode($delim, $string);
+        if ($removeEmptyValues) {
+            $temp = [];
+            foreach ($result as $value) {
+                if (trim($value) !== '') {
+                    $temp[] = $value;
+                }
+            }
+            $result = $temp;
+        }
+        if ($limit > 0 && count($result) > $limit) {
+            $lastElements = array_splice($result, $limit - 1);
+            $result[] = implode($delim, $lastElements);
+        } elseif ($limit < 0) {
+            $result = array_slice($result, 0, $limit);
+        }
+        $result = array_map('trim', $result);
+        return $result;
     }
 }

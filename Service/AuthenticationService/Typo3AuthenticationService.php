@@ -18,4 +18,9 @@ use Port1HybridAuth\Service\AbstractAuthenticationService;
 class Typo3AuthenticationService extends AbstractAuthenticationService
 {
 
+    /**
+     * @var string
+     */
+    protected $pluginName = 'Port1HybridAuthTypo3';
+
 }

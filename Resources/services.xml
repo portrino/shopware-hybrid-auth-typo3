@@ -17,10 +17,12 @@
         <service id="port1_hybrid_auth.typo3_authentication_service" class="Port1HybridAuthTypo3\Service\AuthenticationService\Typo3AuthenticationService">
             <argument>Typo3</argument>
             <argument type="service" id="port1_hybrid_auth.configuration_service" />
+            <argument type="service" id="shopware.plugin.cached_config_reader" />
         </service>
         <service id="port1_hybrid_auth_typo3.typo3_authentication_service" class="Port1HybridAuthTypo3\Service\AuthenticationService\Typo3AuthenticationService">
             <argument>Typo3</argument>
             <argument type="service" id="port1_hybrid_auth.configuration_service" />
+            <argument type="service" id="shopware.plugin.cached_config_reader" />
         </service>
     </services>
 </container>

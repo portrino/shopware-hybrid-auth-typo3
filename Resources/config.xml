@@ -101,6 +101,18 @@
             </description>
         </element>
 
+        <element type="text" scope="shop">
+            <name>typo3_urls_userprofile_request_fields</name>
+            <label lang="en">TYPO3 :: User Profile Request Fields (Override)</label>
+            <label lang="de">TYPO3 :: User Profile Request Fields (Override)</label>
+            <description lang="en">
+                Default: identifier,uid,name,first_name,last_name,email,address,zip,city,company
+            </description>
+            <description lang="de">
+                Default: identifier,uid,name,first_name,last_name,email,address,zip,city,company
+            </description>
+        </element>
+
         <!--
 
         TYPO3 Misc

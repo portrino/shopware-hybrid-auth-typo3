@@ -82,7 +82,7 @@ class Port1HybridAuthTypo3 extends Plugin
         /** @var array $config Plugin configuration for current active shop in frontend */
         $config = Shopware()->Container()->get('shopware.plugin.cached_config_reader')->getByPluginName(
             'Port1HybridAuthTypo3',
-            $this->container->get('shop')
+            $this->container->get('Shop')
         );
         $view->assign('Port1HybridAuthTypo3Config', $config);
 
