@@ -126,28 +126,8 @@ class Hybrid_Providers_Typo3 extends Hybrid_Provider_Model_OAuth2
      */
     public function getUserProfile()
     {
-        $fields = [
-            'identifier',
-            'uid',
-            'name',
-            'first_name',
-            'last_name',
-            'email',
-            'address',
-            'zip',
-            'city',
-            'company'
-        ];
-        if ($this->config['shopwarePluginConfig']['typo3_urls_userprofile_request_fields'] != '') {
-            $fields = $this->trimExplode(
-                ',',
-                $this->config['shopwarePluginConfig']['typo3_urls_userprofile_request_fields'],
-                true
-            );
-        }
-
         $params = [
-            'fields' => implode(',', $fields),
+            'fields' => implode(',', $this->trimExplode(',', $this->config['fields'], true)),
             'access_token' => $this->api->access_token
         ];
         $data = $this->api->get($this->api->userprofile_url, $params);
