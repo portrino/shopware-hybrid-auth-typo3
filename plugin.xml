@@ -3,7 +3,7 @@
     <label lang="de">Portrino HybridAuth - TYPO3</label>
     <label lang="en">Portrino HybridAuth - TYPO3</label>
 
-    <version>1.0.7</version>
+    <version>1.1.0</version>
     <copyright>(c) by portrino GmbH</copyright>
     <license>proprietary</license>
     <description lang="de">
@@ -16,6 +16,19 @@
     <link>http://www.portrino.de/</link>
     <author>portrino GmbH</author>
     <compatibility minVersion="5.2.0" />
+
+    <changelog version="1.1.0">
+        <changes lang="de">
+            [FEATURE] Verarbeitung des Firmennamens im OAuth2 Profile-Endpoint hinzugefügt
+            [FEATURE] OAuth2 Profile-Request-Fields können nun via Plugin-Konfiguration überschrieben werden
+            [TASK] Refactoring des Typo3 Provider-Endpoints
+        </changes>
+        <changes lang="en">
+            [FEATURE] Adds company retrieval in oauth2 profile endpoint parsing
+            [FEATURE] Allow override of oauth2 profile request fields in plugin configuration
+            [TASK] Refactoring of Typo3 provider endpoint
+        </changes>
+    </changelog>
 
     <changelog version="1.0.7">
         <changes lang="de">
