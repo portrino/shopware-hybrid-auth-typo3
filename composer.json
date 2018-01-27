@@ -19,7 +19,7 @@
     ],
     "require": {
         "composer/installers": "~1.0",
-        "portrino/shopware-hybridauth": "~1.0"
+        "portrino/shopware-hybrid-auth": "~1.0"
     },
     "extra": {
         "installer-name": "Port1HybridAuthTypo3"
