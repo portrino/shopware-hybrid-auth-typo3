@@ -30,6 +30,7 @@ class Port1HybridAuthTypo3 extends Plugin
 
     /**
      * @param InstallContext $context
+     * @throws \Exception
      */
     public function install(InstallContext $context)
     {
@@ -41,6 +42,7 @@ class Port1HybridAuthTypo3 extends Plugin
 
     /**
      * @param ActivateContext $context
+     * @throws \Exception
      */
     public function activate(ActivateContext $context)
     {
@@ -71,6 +73,7 @@ class Port1HybridAuthTypo3 extends Plugin
 
     /**
      * @param \Enlight_Event_EventArgs $args
+     * @throws \Exception
      */
     public function onFrontendPostDispatch(\Enlight_Event_EventArgs $args)
     {
@@ -159,7 +162,7 @@ class Port1HybridAuthTypo3 extends Plugin
     }
 
     /**
-     *
+     * @throws \Exception
      */
     private function addIdentityFieldsToUser()
     {
@@ -187,6 +190,9 @@ class Port1HybridAuthTypo3 extends Plugin
         ]);
     }
 
+    /**
+     * @throws \Exception
+     */
     private function copyHybridAuthTypo3Provider()
     {
         /** @var Port1HybridAuthTypo3 $port1HybridAuth */
@@ -194,13 +200,17 @@ class Port1HybridAuthTypo3 extends Plugin
         if ($port1HybridAuth !== null) {
             $this->copy_recursive(
                 $this->getPath() . '/vendor/hybridauth-additional-providers/hybridauth-typo3/',
-                $port1HybridAuth->getPath() . '/vendor/hybridauth/hybridauth/hybridauth/Hybrid/'
+                Shopware()->DocPath() . '/vendor/hybridauth/hybridauth/hybridauth/Hybrid/'
             );
         } else {
             throw new \Exception('Please install plugin Port1HybridAuth first!', 1497531163);
         }
     }
 
+    /**
+     * @param string $src
+     * @param string $dst
+     */
     private function copy_recursive($src, $dst)
     {
         $dir = opendir($src);

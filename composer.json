@@ -23,18 +23,5 @@
     },
     "extra": {
         "installer-name": "Port1HybridAuthTypo3"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "Port1HybridAuthTypo3\\Composer\\AdditionalHybridAuthProvider::installTypo3"
-        ],
-        "post-update-cmd": [
-            "Port1HybridAuthTypo3\\Composer\\AdditionalHybridAuthProvider::installTypo3"
-        ]
-    },
-    "autoload": {
-        "psr-4": {
-            "Port1HybridAuthTypo3\\Composer\\": "Composer/"
-        }
     }
 }
