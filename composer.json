@@ -19,18 +19,22 @@
     ],
     "require": {
         "composer/installers": "~1.0",
-        "portrino/shopware-hybrid-auth": "~1.0"
+        "portrino/shopware-hybrid-auth": "~1.2.3"
     },
     "extra": {
         "installer-name": "Port1HybridAuthTypo3"
     },
     "scripts": {
-        "post-autoload-dump": [
-            "@enable-typo3-provider"
+        "post-install-cmd": [
+            "Port1HybridAuthTypo3\\Composer\\AdditionalHybridAuthProvider::installTypo3"
         ],
-        "enable-typo3-provider": [
-            "[ -d vendor/hybridauth-additional-providers/hybridauth-typo3/Providers ] && cp vendor/hybridauth-additional-providers/hybridauth-typo3/Providers ../Port1HybridAuth/vendor/hybridauth/hybridauth/hybridauth/Hybrid/ -R && echo 'Copy Typo3 Provider' || echo 'Skipped...'",
-            "[ -d vendor/hybridauth-additional-providers/hybridauth-typo3/thirdparty ] && cp vendor/hybridauth-additional-providers/hybridauth-typo3/thirdparty ../Port1HybridAuth/vendor/hybridauth/hybridauth/hybridauth/Hybrid/ -R && echo 'Copy Typo3 OAuth2 Client' || echo 'Skipped...'"
+        "post-update-cmd": [
+            "Port1HybridAuthTypo3\\Composer\\AdditionalHybridAuthProvider::installTypo3"
         ]
+    },
+    "autoload": {
+        "psr-4": {
+            "Port1HybridAuthTypo3\\Composer\\": "Composer/"
+        }
     }
 }
