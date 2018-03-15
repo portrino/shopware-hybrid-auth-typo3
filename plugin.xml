@@ -5,7 +5,7 @@
 
     <version>1.1.0</version>
     <copyright>(c) by portrino GmbH</copyright>
-    <license>proprietary</license>
+    <license>MIT</license>
     <description lang="de">
         Dieses Plugin erlaubt die Authentifierung/ Registrierung von Kunden mittels eines TYPO3 Benutzerkontos.
     </description>
@@ -16,6 +16,15 @@
     <link>http://www.portrino.de/</link>
     <author>portrino GmbH</author>
     <compatibility minVersion="5.2.0" />
+
+    <changelog version="1.1.1">
+        <changes lang="de">
+            Open Source Release on GitHub.
+        </changes>
+        <changes lang="en">
+            Open Source Release on GitHub.
+        </changes>
+    </changelog>
 
     <changelog version="1.1.0">
         <changes lang="de">

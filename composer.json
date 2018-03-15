@@ -1,6 +1,6 @@
 {
-    "name": "portrino/shopware-hybridauthtypo3",
-    "description": "Shopware plugin for oauth2 login via TYPO3",
+    "name": "portrino/shopware-hybrid-auth-typo3",
+    "description": "Shopware plugin for OAuth2 login via TYPO3",
     "license": "proprietary",
     "type": "shopware-plugin",
     "authors": [
