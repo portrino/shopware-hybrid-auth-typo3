@@ -200,11 +200,17 @@ class Port1HybridAuthTypo3 extends Plugin
         if ($port1HybridAuth !== null) {
             $this->copy_recursive(
                 $this->getPath() . '/vendor/hybridauth-additional-providers/hybridauth-typo3/',
-                Shopware()->DocPath() . '/vendor/hybridauth/hybridauth/hybridauth/Hybrid/'
+                $this->getVendorPath() . '/hybridauth/hybridauth/hybridauth/Hybrid/'
             );
         } else {
             throw new \Exception('Please install plugin Port1HybridAuth first!', 1497531163);
         }
+    }
+
+    private function getVendorPath()
+    {
+        $reflection = new \ReflectionClass(\Composer\Autoload\ClassLoader::class);
+        return dirname(dirname($reflection->getFileName()));
     }
 
     /**
