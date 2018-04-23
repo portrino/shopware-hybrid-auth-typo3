@@ -19,7 +19,8 @@
     ],
     "require": {
         "composer/installers": "~1.0",
-        "portrino/shopware-hybrid-auth": "~1.2.3"
+        "mindplay/composer-locator": "~2.1.3",
+        "portrino/shopware-hybrid-auth": "~1.2"
     },
     "extra": {
         "installer-name": "Port1HybridAuthTypo3"

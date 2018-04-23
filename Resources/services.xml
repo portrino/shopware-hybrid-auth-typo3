@@ -3,6 +3,9 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <!--
+            Services
+        -->
         <service id="port1_hybrid_auth_typo3.configuration_service"
                  class="Port1HybridAuthTypo3\Service\ConfigurationService"
                  decorates="port1_hybrid_auth.configuration_service"
@@ -14,15 +17,34 @@
             <argument type="service" id="port1_hybrid_auth_typo3.configuration_service.inner" />
         </service>
 
-        <service id="port1_hybrid_auth.typo3_authentication_service" class="Port1HybridAuthTypo3\Service\AuthenticationService\Typo3AuthenticationService">
+        <service id="port1_hybrid_auth.typo3_authentication_service"
+                 class="Port1HybridAuthTypo3\Service\AuthenticationService\Typo3AuthenticationService">
             <argument>Typo3</argument>
             <argument type="service" id="port1_hybrid_auth.configuration_service" />
             <argument type="service" id="shopware.plugin.cached_config_reader" />
         </service>
-        <service id="port1_hybrid_auth_typo3.typo3_authentication_service" class="Port1HybridAuthTypo3\Service\AuthenticationService\Typo3AuthenticationService">
+        <service id="port1_hybrid_auth_typo3.typo3_authentication_service"
+                 class="Port1HybridAuthTypo3\Service\AuthenticationService\Typo3AuthenticationService">
             <argument>Typo3</argument>
             <argument type="service" id="port1_hybrid_auth.configuration_service" />
             <argument type="service" id="shopware.plugin.cached_config_reader" />
+        </service>
+
+        <!--
+            Subscribers
+        -->
+        <service id="port1_hybrid_auth_typo3.plugin_frontend_subscriber"
+                 class="Port1HybridAuth\Subscriber\PluginFrontendSubscriber">
+            <argument type="service" id="service_container" />
+            <argument>%port1_hybrid_auth.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber" />
+        </service>
+
+        <service id="port1_hybrid_auth_typo3.plugin_assets_compiler_subscriber"
+                 class="Port1HybridAuth\Subscriber\PluginAssetsCompilerSubscriber">
+            <argument type="service" id="service_container" />
+            <argument>%port1_hybrid_auth.plugin_dir%</argument>
+            <tag name="shopware.event_subscriber" />
         </service>
     </services>
 </container>
