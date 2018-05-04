@@ -85,7 +85,10 @@ class ConfigurationService implements ConfigurationServiceInterface
     public function getAllProviderConfigurations()
     {
         $result = $this->service->getAllProviderConfigurations();
-        $result[] = self::PROVIDER;
+        $config = $this->getProviderConfiguration(self::PROVIDER);
+        if ($config !== false) {
+            $result = array_replace_recursive($result, $this->getProviderConfiguration(self::PROVIDER));
+        }
         return $result;
     }
 
