@@ -34,14 +34,14 @@
             Subscribers
         -->
         <service id="port1_hybrid_auth_typo3.plugin_frontend_subscriber"
-                 class="Port1HybridAuth\Subscriber\PluginFrontendSubscriber">
+                 class="Port1HybridAuthTypo3\Subscriber\PluginFrontendSubscriber">
             <argument type="service" id="service_container" />
             <argument>%port1_hybrid_auth.plugin_dir%</argument>
             <tag name="shopware.event_subscriber" />
         </service>
 
         <service id="port1_hybrid_auth_typo3.plugin_assets_compiler_subscriber"
-                 class="Port1HybridAuth\Subscriber\PluginAssetsCompilerSubscriber">
+                 class="Port1HybridAuthTypo3\Subscriber\PluginAssetsCompilerSubscriber">
             <argument type="service" id="service_container" />
             <argument>%port1_hybrid_auth.plugin_dir%</argument>
             <tag name="shopware.event_subscriber" />
