@@ -17,6 +17,25 @@
     <author>portrino GmbH</author>
     <compatibility minVersion="5.2.0" />
 
+    <changelog version="1.2.0">
+        <changes lang="de">
+            [TASK] Aktualisiert den Zielspeicherort, an den der TYPO3-Provider kopiert wird
+            [TASK] Fügt .gitignore, LICENCE und README.md hinzu
+            [TASK] aktualisiert Bootstrap -> Subscriber-Kompononten in dedizierte Klassen verschoben
+            [TASK] Verwende das Paket "mindplay/composer-locator", um nach anderen Composer-Paketen zu suchen, um den hybridauth-typo3 Provider während der Plugin-Installation zu aktivieren
+            [BUGFIX] aktualisiert getAllProviderConfigurations () in ConfigurationService Decorator
+            [BUGFIX] Entfernt Tippfehler in services.xml
+        </changes>
+        <changes lang="en">
+            [TASK] Updates destination location to which TYPO3 provider is copied to
+            [TASK] Adds .gitignore, LICENCE and README.md
+            [TASK] updates bootstrap -> move subscriber parts into subscriber classes
+            [TASK] use "mindplay/composer-locator" package to locate other composer packages to activate hybridauth-typo3 provider during plugin install
+            [BUGFIX] updates getAllProviderConfigurations() in ConfigurationService decorator
+            [BUGFIX] Removes typo in services.xml
+        </changes>
+    </changelog>
+
     <changelog version="1.1.1">
         <changes lang="de">
             Open Source Release on GitHub.
